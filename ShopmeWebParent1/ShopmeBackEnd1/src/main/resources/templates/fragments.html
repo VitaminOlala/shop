@@ -34,14 +34,20 @@
 				[[${label}]]
 	</a>
 	
-		<th th:fragment="column_link1(fieldName, columnLabel)">
+	<th th:fragment="column_link1(fieldName, columnLabel)">
 		<a  class="text-white"
-			th:href="@{'/users/page/' + ${currentPage} + '?sortField=' + ${fieldName} +'&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
+			th:href="@{'/categories/page/' + ${currentPage} + '?sortField=' + ${fieldName} +'&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 				[[${columnLabel}]]
 		</a>
 
 		<span th:if="${sortField == fieldName}"
 			th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
 	</th>
+	
+	<a th:fragment="page_link1(pageNum, label)"
+		class="page-link"
+		th:href="@{'/users/page/' + ${pageNum} + '?sortField=' + ${sortFiled} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
+				[[${label}]]
+	</a>
 </body>
 </html>

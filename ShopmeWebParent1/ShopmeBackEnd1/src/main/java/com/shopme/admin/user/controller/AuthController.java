@@ -19,30 +19,30 @@ import com.shopme.admin.security.ShopmeUserDetailsService;
 import com.shopme.common.entity.LoginRequest;
 import com.shopme.common.entity.LoginResponse;
 
-@RestController
+//@RestController
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManagerBean;
-    @Autowired
-    ShopmeUserDetailsService shopmeUserDetailsService;
-    @Autowired
-    JwtUtils jwtUtils;
-    @Autowired
-    ApiResponse apiResponse;
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
-        try {
-            authenticate(loginRequest.getEmail() ,loginRequest.getPassword());
-        }catch (BadCredentialsException e){
-            return apiResponse.errorResponse(e.getMessage(), HttpStatus.BAD_REQUEST, false);
-        }
-        UserDetails u = shopmeUserDetailsService.loadUserByUsername(loginRequest.getEmail());
-        final String token = jwtUtils.generateToken(u);
-        return ResponseEntity.ok(new LoginResponse(token, "Login successful", true));
-    }
-
-    private void authenticate(String name, String pass) {
-        authenticationManagerBean.authenticate(new UsernamePasswordAuthenticationToken(name,pass));
-    }
+//    @Autowired
+//    AuthenticationManager authenticationManagerBean;
+//    @Autowired
+//    ShopmeUserDetailsService shopmeUserDetailsService;
+//    @Autowired
+//    JwtUtils jwtUtils;
+//    @Autowired
+//    ApiResponse apiResponse;
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+//        try {
+//            authenticate(loginRequest.getEmail() ,loginRequest.getPassword());
+//        }catch (BadCredentialsException e){
+//            return apiResponse.errorResponse(e.getMessage(), HttpStatus.BAD_REQUEST, false);
+//        }
+//        UserDetails u = shopmeUserDetailsService.loadUserByUsername(loginRequest.getEmail());
+//        final String token = jwtUtils.generateToken(u);
+//        return ResponseEntity.ok(new LoginResponse(token, "Login successful", true));
+//    }
+//
+//    private void authenticate(String name, String pass) {
+//        authenticationManagerBean.authenticate(new UsernamePasswordAuthenticationToken(name,pass));
+//    }
 }

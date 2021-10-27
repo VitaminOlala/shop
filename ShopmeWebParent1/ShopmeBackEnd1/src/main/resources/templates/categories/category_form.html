@@ -12,7 +12,7 @@
 	</div>
 	<form th:action="@{/categories/save}" method="post" style="max-width: 500px; margin: 0 auto" 
 		enctype="multipart/form-data"
-		th:object="${category}" >
+		th:object="${cate}" >
 		<input type="hidden" th:field="*{id}" />
 		<div class="border border-secondary rounded p-3">
 			<div class="form-group row">
@@ -24,7 +24,7 @@
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label">Alias</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" th:field="*{firstName}" required minlenght="3", maxlength="64" />
+					<input type="text" class="form-control" th:field="*{alias}" required minlenght="3", maxlength="64" />
 				</div>
 			</div>
 			<div class="form-group row">
@@ -46,10 +46,9 @@
 				<div class="col-sm-8">
 					<input type="hidden" th:field="*{image}" />
 					<input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg" 
-						required
 						class="mb-2"/>
 					<div class="mt-2">
-						<img id="thumbnail" alt="Image preview"  width="100" height="150" th:src="@{/images/image-thumbnail.png}"
+						<img id="thumbnail" alt="Image preview"  width="100" height="150" th:src="@{${cate.imagePath}}"
 							class="img-fluid"/>
 					</div>	
 				</div>
@@ -58,7 +57,7 @@
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label">Enable</label>
 				<div class="col-sm-8">
-					<input type="checkbox" th:field="*{enable}" />
+					<input type="checkbox" th:field="*{enabled}" />
 				</div>
 			</div>	
 						

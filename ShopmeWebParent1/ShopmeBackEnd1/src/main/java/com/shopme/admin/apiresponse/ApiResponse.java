@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 
 import com.shopme.common.entity.ResponseError;
 
-@Component
+//@Component
 public class ApiResponse {
-	ResponseError responseError;
-	
-    public ResponseEntity<?> errorResponse(String message, HttpStatus httpStatus, boolean success){
-        responseError = new ResponseError(success, message);
-        return new ResponseEntity<>(responseError, httpStatus);
-    }
+//	ResponseError responseError;
+//	
+//    public ResponseEntity<?> errorResponse(String message, HttpStatus httpStatus, boolean success){
+//        responseError = new ResponseError(success, message);
+//        return new ResponseEntity<>(responseError, httpStatus);
+//    }
 }

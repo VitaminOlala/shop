@@ -17,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,8 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ShopmeUserDetailsService();
 	}
 	
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+	
+//    @Autowired
+//    private JwtRequestFilter jwtRequestFilter;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -47,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
     }
 	
 	@Override
@@ -64,10 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	    .maximumSessions(1).expiredUrl("/login?message=max_session").maxSessionsPreventsLogin(true);
 		// Cau hinh cho form login
 
-		http.csrf().disable();
+//		http.csrf().disable();
 		http.authorizeRequests()
 			.antMatchers("/users/**").hasAuthority("Admin")
-			.antMatchers("/login").permitAll()
+			.antMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -78,13 +78,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()  
 			
 			
-//			.and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login?message=logout")
+			.and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login?message=logout")
 		.and().rememberMe().key("AbcDefgHijKlmnOpqrs_1234567890")  
-				.tokenValiditySeconds(30)
+				.tokenValiditySeconds(30);
 				//Set time tồn tai cho token
-				.and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	;			
-				http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//				.and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)	;			
+//				http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}
 

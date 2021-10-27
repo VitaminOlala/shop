@@ -46,8 +46,8 @@
 				<tr th:each="cate : ${listCategories}">
 					<td>[[${cate.id}]]</td>
 					<td>
-						<span th:if="${cate.image == null}" class="fas fa-portrait fa-3x icon-silver"></span>
-						<img height="100" width="100" th:if="${cate.image != null}"  />
+
+						<img height="100" width="100" th:src="@{${cate.imagePath}}" />
 					</td>
 					<td>[[${cate.name}]]</td>
 					<td>[[${cate.alias}]]</td>
@@ -60,15 +60,22 @@
 						title="Enable this category"></a>
 					</td>
 					<td>
-						<a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${user.id}}" title="Edit this user"></a>
+						<a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${cate.id}}" title="Edit this user"></a>
 						 &nbsp; 
-						 <a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/users/delete/' + ${user.id}}" title="Delete this user"></a>
+						 <a class="fas fa-trash fa-2x icon-dark link-delete" th:href="@{'/categories/delete/' + ${cate.id}}" title="Delete this user"></a>
 					
 					</td>
 				</tr>	
 			</tbody>
 		</table>
 	</div>
+	<div class="text-center m-1" th:if="${totalItems > 0}">
+		<span>Showing category  # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+	</div>
+	<div class="text-center m-1" th:unless="${totalItems > 0}">
+		<span>No categories found</span>
+	</div>	
+	
 	
 	
 	
@@ -83,7 +90,7 @@
 				</div>
 				
 				<div class="modal-body">
-					<span>Are you sure you want to delete this user ID</span>
+					<span>Are you sure you want to delete this cate ID</span>
 				</div>
 				
 				<div class="modal-footer">
@@ -107,7 +114,7 @@
 	//});
 	
 	function clearFilter(){
-		window.location = "[[@{/users}]]";
+		window.location = "[[@{/categories}]]";
 	}
 </script>
 </body>
